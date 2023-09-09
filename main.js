@@ -36,8 +36,8 @@ scene.add(pointLight, ambientLight)
 const lightHelper = new THREE.PointLightHelper(pointLight)
 
 // Shows the direction of Grid
-const gridHelper = new THREE.GridHelper(200, 50);
-scene.add(lightHelper, gridHelper)
+// const gridHelper = new THREE.GridHelper(200, 50);
+// scene.add(lightHelper, gridHelper)
 
 // Orbit controls Allow the camera to orbit around the center of the scene
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -61,7 +61,7 @@ scene.background = spaceTexture;
 
 // Avatar
 
-const mineTexture = new THREE.TextureLoader().load('gurjeet.png');
+const mineTexture = new THREE.TextureLoader().load('mine.jpg');
 
 const mine = new THREE.Mesh(
     new THREE.BoxGeometry(3, 3, 3),
@@ -85,6 +85,25 @@ const moon = new THREE.Mesh(
 
 scene.add(moon);
 
+moon.position.z = 30;
+moon.position.setX(-10);
+
+
+function moveCamera() {
+    const t = document.body.getBoundingClientRect().top;
+    moon.rotation.x += 0.05;
+    moon.rotation.y += 0.075;
+    moon.rotation.z += 0.05;
+
+    mine.rotation.y += 0.01;
+    mine.rotation.z += 0.01;
+
+    camera.position.z = t * -0.01;
+    camera.position.x = t * -0.0002;
+    camera.position.y = t * -0.0002;
+}
+
+document.body.onscroll = moveCamera
 
 // Function that animate the ring to rotate in loop
 function animate() {
