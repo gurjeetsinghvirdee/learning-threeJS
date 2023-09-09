@@ -42,21 +42,6 @@ scene.add(lightHelper, gridHelper)
 // Orbit controls Allow the camera to orbit around the center of the scene
 const controls = new OrbitControls(camera, renderer.domElement);
 
-function animate() {
-    requestAnimationFrame( animate );
-
-    torus.rotation.x += 0.01;
-    torus.rotation.y += 0.005;
-    torus.rotation.z += 0.01;
-
-    controls.update();
-
-    renderer.render( scene, camera );
-}
-
-animate();
-
-
 // Function that add stars in the background
 function addStar() {
     const geometry = new THREE.SphereGeometry(0.25, 24, 24);
@@ -70,3 +55,20 @@ function addStar() {
 }
 
 Array(200).fill().forEach(addStar);
+
+const spaceTexture = new THREE.TextureLoader().load('space.jpg');
+scene.background = spaceTexture;
+
+function animate() {
+    requestAnimationFrame( animate );
+
+    torus.rotation.x += 0.01;
+    torus.rotation.y += 0.005;
+    torus.rotation.z += 0.01;
+
+    controls.update();
+
+    renderer.render( scene, camera );
+}
+
+animate();
