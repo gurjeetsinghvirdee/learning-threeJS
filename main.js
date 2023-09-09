@@ -20,7 +20,7 @@ camera.position.setZ(30);
 renderer.render( scene, camera );
 
 const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
-const material = new THREE.MeshStandardMaterial( { color: 0xff4500 } );
+const material = new THREE.MeshBasicMaterial( { color: 0xF65000 } );
 const torus = new THREE.Mesh( geometry, material );
 
 scene.add(torus)
@@ -59,6 +59,34 @@ Array(200).fill().forEach(addStar);
 const spaceTexture = new THREE.TextureLoader().load('space.jpg');
 scene.background = spaceTexture;
 
+// Avatar
+
+const mineTexture = new THREE.TextureLoader().load('gurjeet.png');
+
+const mine = new THREE.Mesh(
+    new THREE.BoxGeometry(3, 3, 3),
+    new THREE.MeshBasicMaterial( { map: mineTexture } )
+);
+
+scene.add(mine);
+
+// Moon 
+
+const moonTexture = new THREE.TextureLoader().load('moon.jpg');
+const normalTexture = new THREE.TextureLoader().load('normal.jpg');
+
+const moon = new THREE.Mesh(
+    new THREE.SphereGeometry(3, 32, 32),
+    new THREE.MeshStandardMaterial( {
+        map: moonTexture,
+        normalMap: normalTexture
+    } )
+);
+
+scene.add(moon);
+
+
+// Function that animate the ring to rotate in loop
 function animate() {
     requestAnimationFrame( animate );
 
