@@ -23,11 +23,19 @@ const torus = new THREE.Mesh( geometry, material );
 
 scene.add(torus)
 
+// Lightning 
 const pointLight = new THREE.PointLight(0xffffff)
 pointLight.position.set(5, 5, 5);
 
 const ambientLight = new THREE.AmbientLight(0xffffff)
 scene.add(pointLight, ambientLight)
+
+// Shows the direction of Light
+const lightHelper = new THREE.PointLightHelper(pointLight)
+
+// Shows the direction of Grid
+const gridHelper = new THREE.GridHelper(200, 50);
+scene.add(lightHelper, gridHelper)
 
 function animate() {
     requestAnimationFrame( animate );
